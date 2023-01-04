@@ -1,0 +1,41 @@
+<div class="container p-5">
+  <h1 class="p-2">Basic Form</h1>
+  <div>
+    <form formGroupName="basicForm">
+      <!-- NAME -->
+      <div class="row mb-2" style="background: pink">
+        <label for="name" class="col-4 col-form-label">Name </label>
+        <div class="col-8">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+            placeholder="Name"
+          />
+        </div>
+      </div>
+      <!--end of NAME -->
+      <!-- AGE -->
+      <div class="row mb-2">
+        <label for="age" class="col-4 col-form-label">Age </label>
+        <div class="col-8">
+          <input
+            type="text"
+            class="form-control"
+            id="age"
+            formControlName="age"
+            placeholder="Age"
+          />
+        </div>
+      </div>
+      <!--end of AGE -->
+    </form>
+
+    <button class="btn btn-primary">Submit</button>
+  </div>
+</div>
+
+<div>
+  <!-- <pre>Form Value: {{ basicForm.value }} </pre> -->
+</div>
