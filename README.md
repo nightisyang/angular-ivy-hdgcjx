@@ -4,22 +4,37 @@
 
 ## Part 1: simple form
 1. Create simple form consist of:
-- text input
-- number input
-- dropdown input
-- checkbox input
+    - [x] text input 
+    - [x] number input
+    - [x] dropdown input
+    - [x] checkbox input
 
 2. click submit button to console.log() the form value, display success message, and reset the form on submit
+    - [x] console.log on submit
+    - [x] display success message
+    - [x] reset the form on submit
 
 3. library involves:
-- bootstrap 5
-- angular form group
-- toastr
+    - [x] bootstrap 5
+    - [x] angular form group
+    - [x] toastr
 
 4. Goals:
-- able to retrieve value from FormGroup
-- able to update value from FormGroup
-- able to display value from FormGroup
-- able to make use of formControl
-- able to link HTML Template and also Typescript
+    - [x] able to retrieve value from FormGroup
+    - [x] able to update value from FormGroup
+    - [x] able to display value from FormGroup
+    - [x] able to make use of formControl
+    - [x] able to link HTML Template and also Typescript
+    
+## Part 1a: strict type form, using TypedFormGroup
+1. in part 1, simple form were using the UntypedFormGroup. 
+    - [ ] Convert the current UntypedFormGroup, into TypedFormGroup
+
+2. create a model for the TypedFormGroup
+    - [ ] TypedFormGroup model
+
+3. Goals:
+    - [ ] able to implement strictly typed form
+    - [ ] able to explain the usage scenarios
+    - [ ] able to add Typed Form Group Model
 
