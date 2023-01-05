@@ -26,4 +26,9 @@ export class BasicFormComponent implements OnInit {
       age: 0,
     });
   }
+
+  onSubmit() {
+    console.log('submitted');
+    console.log(this.basicForm.value);
+  }
 }

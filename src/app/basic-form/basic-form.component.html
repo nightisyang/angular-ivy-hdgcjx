@@ -1,7 +1,7 @@
 <div class="container p-5">
   <h1 class="p-2">Basic Form</h1>
   <div>
-    <form formGroupName="basicForm">
+    <form [formGroup]="basicForm" (ngSubmit)="onSubmit()">
       <!-- NAME -->
       <div class="row mb-2">
         <label for="name" class="col-4 col-form-label">Name </label>
@@ -30,9 +30,9 @@
         </div>
       </div>
       <!--end of AGE -->
+      <button class="btn btn-primary">Submit</button>
     </form>
 
-    <button class="btn btn-primary">Submit</button>
   </div>
 </div>
 
