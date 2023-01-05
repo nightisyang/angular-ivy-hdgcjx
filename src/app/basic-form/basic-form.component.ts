@@ -1,6 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  UntypedFormGroup,
+  FormGroup,
+  FormControl,
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { BasicFormInterface } from '../interface/basic-form-model';
+
+/** Place Model/Interface in separate folder
+ * interface model for basicForm
+ * interface BasicFormType {
+ *    name: FormControl<string>;
+ *    age: FormControl<number>;
+ *  }
+ */
 
 @Component({
   selector: 'app-basic-form',
@@ -8,9 +22,31 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./basic-form.component.css'],
 })
 export class BasicFormComponent implements OnInit {
-  basicForm: UntypedFormGroup;
+  // UntypedFormGroup is a non-strongly-typed version of FormGroup
+  // basicForm: UntypedFormGroup;
+
+  // change from the above to strongly typed version of FormGroup
+  // FormGroup - Tracks the value and validity state of a group of FormControl instances.
+  // FormControl - Tracks the value and validation status of an individual form control.
+
+  // basicForm contains a group of values and these values are FormControl <any> types
+  // assign type from BasicFormType interface
+  basicForm: FormGroup<BasicFormInterface>;
+
+  /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
+   *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
+   *code is from initForm() - declaring it directly from fb assigns type through type inferrence
+   *if basicForm: FormGroup is declared, it's is assigned to <any>
+   *https://blog.angular-university.io/angular-typed-forms/ see common pitfalls
+   *basicForm = this.fb.group({
+   *  name: [''],
+   *  age: 0,
+   *});
+   */
+
   constructor(
     /**
+     *
      * - in order to use FormBuilder, need to import the ReactiveFormsModule & FormsModule
      */
     private fb: FormBuilder,
@@ -23,9 +59,19 @@ export class BasicFormComponent implements OnInit {
   }
 
   initForm() {
+    /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
+     * FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
+     * this.basicForm = this.fb.group({
+     *   name: [''],
+     *  age: 0,
+     * });
+     */
+
+    // official way to assign types
+    // https://stackoverflow.com/a/72708372
     this.basicForm = this.fb.group({
-      name: [''],
-      age: 0,
+      name: new FormControl<string | null>(''),
+      age: new FormControl<number | null>(0),
     });
   }
 
@@ -41,9 +87,18 @@ export class BasicFormComponent implements OnInit {
       'Values logged in console and form reset!'
     );
 
+    // const nameControl = this.basicForm.get('name');
+    // const ageControl = this.basicForm.get('age');
+
+    // use this to allow compiler to detect error, 'name' might be mispelled in .get('name')
+    const nameControl = this.basicForm.controls.name;
+    const ageControl = this.basicForm.controls.age;
+
+    // assigning the wrong types not possible due to type safety from inferred type from FormBuilder
+    // console.log(nameControl.setValue(1)); // expected to error out
+    // console.log(ageControl.setValue('asdfasd')); // expected to error out
+
     // resets form value after submission
-    const nameControl = this.basicForm.get('name');
-    const ageControl = this.basicForm.get('age');
 
     nameControl.reset();
     ageControl.reset();
