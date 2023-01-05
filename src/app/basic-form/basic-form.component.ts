@@ -32,16 +32,20 @@ export class BasicFormComponent implements OnInit {
   onSubmit() {
     console.log('submitted');
     // logs out value of form
-    console.log(this.basicForm.value);
-
-    // resets form value after submission
-    this.basicForm.get('name').reset();
-    this.basicForm.get('age').reset();
+    const basicFormVal = this.basicForm.value;
+    console.log(basicFormVal);
 
     // toastr prompt
     this.toastr.success(
-      'Form Submitted!',
+      `Form Submitted! Name: ${basicFormVal.name} Age: ${basicFormVal.age}`,
       'Values logged in console and form reset!'
     );
+
+    // resets form value after submission
+    const nameControl = this.basicForm.get('name');
+    const ageControl = this.basicForm.get('age');
+
+    nameControl.reset();
+    ageControl.reset();
   }
 }
