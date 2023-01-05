@@ -1,7 +1,7 @@
 <div class="container p-5">
   <h1 class="p-2">Basic Form</h1>
   <div>
-    <form formGroupName="basicForm">
+    <form [formGroup]="basicForm" (ngSubmit)="onSubmit()">
       <!-- NAME -->
       <div class="row mb-2">
         <label for="name" class="col-4 col-form-label">Name </label>
@@ -21,7 +21,7 @@
         <label for="age" class="col-4 col-form-label">Age </label>
         <div class="col-8">
           <input
-            type="text"
+            type="number"
             class="form-control"
             id="age"
             formControlName="age"
@@ -30,9 +30,40 @@
         </div>
       </div>
       <!--end of AGE -->
+      <!-- DROPDOWN -->
+      <div class="dropdown mb-2">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+      <!-- end of DROPDOWN -->
+      <!-- CHECKBOX -->
+      <div class="form-check mb-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+        />
+        <label class="form-check-label" for="flexCheckDefault">
+          Default checkbox
+        </label>
+      </div>
+      <!-- end of CHECKBOX -->
+      <button class="btn btn-primary">Submit</button>
     </form>
-
-    <button class="btn btn-primary">Submit</button>
   </div>
 </div>
 
