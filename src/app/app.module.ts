@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
-import {BasicFormComponent} from './basic-form/basic-form.component'
+import { BasicFormComponent } from './basic-form/basic-form.component'
 
 @NgModule({
   imports: [
