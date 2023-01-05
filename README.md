@@ -25,4 +25,16 @@
     - [x] able to display value from FormGroup
     - [x] able to make use of formControl
     - [x] able to link HTML Template and also Typescript
+    
+## Part 1a: strict type form, using TypedFormGroup
+1. in part 1, simple form were using the UntypedFormGroup. 
+    - [ ] Convert the current UntypedFormGroup, into TypedFormGroup
+
+2. create a model for the TypedFormGroup
+    - [ ] TypedFormGroup model
+
+3. Goals:
+    - [ ] able to implement strictly typed form
+    - [ ] able to explain the usage scenarios
+    - [ ] able to add Typed Form Group Model
 
