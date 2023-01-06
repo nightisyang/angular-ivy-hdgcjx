@@ -77,13 +77,13 @@
 
 ## Part 6: Angular Lifecycle:
 1. Implment angular lifecycles such as:
-    - [ ] ngOnInit
-    - [ ] ngAfterViewInit
-    - [ ] ngOnDestroy
+    - [x] ngOnInit
+    - [x] ngAfterViewInit
+    - [x] ngOnDestroy
 
 2. Goals:
-    - [ ] able to know and explain the usage
-    - [ ] able to differentiate between constructor, and ngOnInit
+    - [x] able to know and explain the usage
+    - [x] able to differentiate between constructor, and ngOnInit
     - [ ] bonus if able to implement additional lifecycles
 
 
