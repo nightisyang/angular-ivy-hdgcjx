@@ -12,7 +12,20 @@
             id="name"
             formControlName="name"
             placeholder="Name"
+            [ngClass]="{
+              'is-valid': name.valid,
+              'is-invalid': name.invalid && (name.dirty || name.touched)
+            }"
           />
+          <div
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="invalid-feedback"
+          >
+            <div *ngIf="name.errors?.['required']">Name is required.</div>
+            <div *ngIf="name.errors?.['minlength']">
+              Name must be at least 4 characters long.
+            </div>
+          </div>
         </div>
       </div>
       <!--end of NAME -->
@@ -26,7 +39,19 @@
             id="age"
             formControlName="age"
             placeholder="Age"
+            [ngClass]="{
+              'is-valid': age.valid,
+              'is-invalid': age.invalid && (age.dirty || age.touched)
+            }"
           />
+          <div
+            *ngIf="age.invalid && (age.dirty || age.touched)"
+            class="invalid-feedback"
+          >
+            <div *ngIf="name.errors?.['required']">Age is required.</div>
+            <div *ngIf="name.errors?.['min']">Age must be more than 1.</div>
+            <div *ngIf="name.errors?.['max']">Age must be less than 120.</div>
+          </div>
         </div>
       </div>
       <!--end of AGE -->
@@ -68,5 +93,8 @@
 </div>
 
 <div>
-  <!-- <pre>Form Value: {{ basicForm.value }} </pre> -->
+  <p>Form Value: {{ basicForm.value | json }}</p>
+  <p>Form Valid: {{ basicForm.valid | json }}</p>
+  <p>Name Error: {{ name.errors | json }}</p>
+  <p>Age Error: {{ age.errors | json }}</p>
 </div>

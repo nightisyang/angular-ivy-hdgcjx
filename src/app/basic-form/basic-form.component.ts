@@ -4,6 +4,7 @@ import {
   UntypedFormGroup,
   FormGroup,
   FormControl,
+  Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BasicFormInterface } from '../interface/basic-form-model';
@@ -70,16 +71,40 @@ export class BasicFormComponent implements OnInit {
     // official way to assign types
     // https://stackoverflow.com/a/72708372
     this.basicForm = this.fb.group({
-      name: new FormControl<string | null>(''),
-      age: new FormControl<number | null>(0),
+      name: new FormControl<string | null>('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      age: new FormControl<number | null>(null, [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(120),
+      ]),
     });
+  }
+
+  get name() {
+    return this.basicForm.controls.name;
+  }
+
+  get age() {
+    return this.basicForm.controls.age;
   }
 
   onSubmit() {
     console.log('submitted');
     // logs out value of form
     const basicFormVal = this.basicForm.value;
-    console.log(basicFormVal);
+    console.log(basicFormVal, this.basicForm.valid);
+
+    // toastr prompt and return if form invalid
+    if (this.basicForm.invalid) {
+      this.toastr.warning(
+        'Values entered are not valid, please re-enter values',
+        'Invalid Form'
+      );
+      return;
+    }
 
     // toastr prompt
     this.toastr.success(
