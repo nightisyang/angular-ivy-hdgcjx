@@ -101,6 +101,14 @@ export class BasicFormComponent implements OnInit {
     return this.basicForm.controls.age;
   }
 
+  get firstname() {
+    return this.nameForm.controls.firstname;
+  }
+
+  get lastname() {
+    return this.nameForm.controls.lastname;
+  }
+
   onSubmit() {
     console.log('submitted');
     // logs out value of form
