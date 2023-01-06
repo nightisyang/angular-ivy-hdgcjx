@@ -217,11 +217,12 @@ export class BasicFormComponent implements OnInit {
   }
 
   onDisableInput() {
-    // this.basicForm.disable();
-    // console.log(this.toggle[this.toggleVal], this.toggle, this.toggleVal);
+    // calls function in toggle object to respective state assigned by toggleVal
     this.toggle[this.toggleVal].method();
 
+    // increments toggleVal to cycle through presets
     this.toggleVal++;
+    // reassignes toggleVal to 0 when out of range
     if (this.toggleVal === 4) {
       this.toggleVal = 0;
     }
