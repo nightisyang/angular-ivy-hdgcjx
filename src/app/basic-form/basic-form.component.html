@@ -230,8 +230,8 @@
 
 <!-- Lifecycle -->
 <div class="container p-5 text-center">
-  <hello *ngIf="surprise" [name]="'Tranglo'"></hello>
   <button (click)="toggleSurprise()" type="button" class="btn btn-primary">
     Surprise!
   </button>
+  <hello *ngIf="surprise" [name]="'Tranglo'"></hello>
 </div>
