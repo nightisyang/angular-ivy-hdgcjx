@@ -39,6 +39,51 @@ export class BasicFormComponent implements OnInit {
   BMIForm: FormGroup<BMIInterface>;
   resNameConcat: string;
   resBMICalc: string;
+  toggleVal: number = 0;
+  toggle = {
+    0: {
+      btnName: 'Disable All Inputs',
+      btnClass: 'btn-danger',
+      method: () => {
+        console.log('disabling all...');
+        this.basicForm.disable();
+        this.basicFormValRawVal();
+      },
+    },
+    1: {
+      btnName: 'Enable All Inputs',
+      btnClass: 'btn-primary',
+      method: () => {
+        console.log('enabling all...');
+        this.basicForm.enable();
+        this.basicFormValRawVal();
+      },
+    },
+    2: {
+      btnName: 'Disable Name Input',
+      btnClass: 'btn-danger',
+      method: () => {
+        console.log(
+          'disabling name... watch name property dissapear in basicForm.val'
+        );
+        this.name.disable();
+        this.basicFormValRawVal();
+      },
+    },
+    3: {
+      btnName: 'Enable Name Input',
+      btnClass: 'btn-primary',
+      method: () => {
+        console.log('enabling name...');
+        this.name.enable();
+        this.basicFormValRawVal();
+      },
+    },
+  };
+  basicFormValRawVal = (): void => {
+    console.log('basicForm Val:', this.basicForm.value);
+    console.log('basicForm rawVal :', this.basicForm.getRawValue());
+  };
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -83,7 +128,7 @@ export class BasicFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
-      age: new FormControl<number | null>(null, [
+      age: new FormControl<number | null>(0, [
         Validators.required,
         Validators.min(1),
         Validators.max(120),
@@ -160,8 +205,8 @@ export class BasicFormComponent implements OnInit {
     // const ageControl = this.basicForm.get('age');
 
     // use this to allow compiler to detect error, 'name' might be mispelled in .get('name')
-    const nameControl = this.basicForm.controls.name;
-    const ageControl = this.basicForm.controls.age;
+    // const nameControl = this.basicForm.controls.name;
+    // const ageControl = this.basicForm.controls.age;
 
     // assigning the wrong types not possible due to type safety from inferred type from FormBuilder
     // console.log(nameControl.setValue(1)); // expected to error out
@@ -169,17 +214,29 @@ export class BasicFormComponent implements OnInit {
 
     // resets form value after submission
 
-    nameControl.reset();
-    ageControl.reset();
+    this.name.reset();
+    this.age.reset();
+  }
+
+  onDisableInput() {
+    // calls function in toggle object to respective state assigned by toggleVal
+    this.toggle[this.toggleVal].method();
+
+    // increments toggleVal to cycle through presets
+    this.toggleVal++;
+    // reassignes toggleVal to 0 when out of range
+    if (this.toggleVal === 4) {
+      this.toggleVal = 0;
+    }
   }
 
   onNameClick() {
-    const firstnameCtrl = this.nameForm.controls.firstname;
-    const lastnameCtrl = this.nameForm.controls.lastname;
-    console.log(firstnameCtrl.value, lastnameCtrl.value);
+    // const firstnameCtrl = this.nameForm.controls.firstname;
+    // const lastnameCtrl = this.nameForm.controls.lastname;
+    // console.log(firstnameCtrl.value, lastnameCtrl.value);
 
     // error handling, if invalid prompt invalid and return
-    if (firstnameCtrl.invalid || lastnameCtrl.invalid) {
+    if (this.nameForm.invalid) {
       this.toastr.error(
         'Please enter a valid firstname or lastname',
         'Invalid names'
@@ -188,7 +245,7 @@ export class BasicFormComponent implements OnInit {
     }
 
     // concatenate firstname and lastname
-    this.resNameConcat = `${firstnameCtrl.value} ${lastnameCtrl.value}`;
+    this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
 
     // names valid, prompt success
     this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');

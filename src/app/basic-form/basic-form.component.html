@@ -87,8 +87,17 @@
         </label>
       </div>
       <!-- end of CHECKBOX -->
-      <button class="btn btn-primary">Submit</button>
+      <!-- <div class="row mb-2"> -->
+      <button class="btn btn-primary mb-2">Submit</button>
+      <!-- <div class="col-6"></div> -->
+      <!-- </div> -->
     </form>
+    <button
+      (click)="onDisableInput()"
+      class="btn  {{ toggle[toggleVal].btnClass }}"
+    >
+      {{ toggle[toggleVal].btnName }}
+    </button>
   </div>
 </div>
 

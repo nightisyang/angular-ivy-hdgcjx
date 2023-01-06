@@ -45,10 +45,10 @@
 2. Display error message when clicking submit, but the form is invalid
     - [x] prompt using toastr invalid to user when onSubmit()
 
-2. click submit button to display success message when the form is valid.
+3. click submit button to display success message when the form is valid.
     - [x] if form is valid, display success prompt using toastr when onSubmit()
 
-3. library involves:
+4. library involves:
     - bootstrap 5
     - angular form group
     - toastr
@@ -56,9 +56,18 @@
 ## Part 3: Event Listener
 1. Add an event listener to the at least 2 of the input eg. string concatenation, bmi calculation 
     - [x] Implemented both examples
-3. With every changes on the value, run event listener 
+2. With every changes on the value, run event listener 
     - [x] Listening to click event on button , call function
-5. Display the result from the event listener 
+3. Display the result from the event listener 
     - [x] function takes values from two input fields, concat and calcs respectively and outputs result
+
+##Part 4: Disable and enable input
+1. With the form and inputs created, create an additional button.
+    - [x] Created addition button for basicForm
+2. Add an event listener to the button, to make the inputs enabled all, disabled all, disabled partially, and enable partially.
+    - [x] Listen to click event on button, calls onDisableInput() - function that toggles through presets to disable all inputs, enable all inputs, disable one input, enable one input
+3. Console log the form value (including the disabled inputs). tips: use getRawValue() for disabled inputs
+ - [x] logged out values for each event, using both control.value and control.getRawValue()
+
 
 
