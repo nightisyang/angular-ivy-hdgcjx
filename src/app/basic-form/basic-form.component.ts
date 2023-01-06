@@ -97,12 +97,13 @@ export class BasicFormComponent implements OnInit {
     const basicFormVal = this.basicForm.value;
     console.log(basicFormVal, this.basicForm.valid);
 
+    // toastr prompt and return if form invalid
     if (this.basicForm.invalid) {
       this.toastr.warning(
         'Values entered are not valid, please re-enter values',
         'Invalid Form'
       );
-      return
+      return;
     }
 
     // toastr prompt
