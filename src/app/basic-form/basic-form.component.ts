@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BasicFormInterface } from '../interface/basic-form-model';
+import { FirstLastNameInterface } from '../interface/firstlast-name-model';
 
 /** Place Model/Interface in separate folder
  * interface model for basicForm
@@ -33,7 +34,7 @@ export class BasicFormComponent implements OnInit {
   // basicForm contains a group of values and these values are FormControl <any> types
   // assign type from BasicFormType interface
   basicForm: FormGroup<BasicFormInterface>;
-  nameForm: FormGroup;
+  nameForm: FormGroup<FirstLastNameInterface>;
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -87,8 +88,8 @@ export class BasicFormComponent implements OnInit {
 
   initNameForm() {
     this.nameForm = this.fb.group({
-      firstname: new FormControl(''),
-      lastname: new FormControl(''),
+      firstname: new FormControl<string | null>('', Validators.required),
+      lastname: new FormControl<string | null>('', Validators.required),
     });
   }
 
