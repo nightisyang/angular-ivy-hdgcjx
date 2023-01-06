@@ -38,7 +38,7 @@ export class BasicFormComponent implements OnInit {
   nameForm: FormGroup<FirstLastNameInterface>;
   BMIForm: FormGroup<BMIInterface>;
   resNameConcat: string;
-  resBMICalc: number;
+  resBMICalc: string;
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -196,5 +196,33 @@ export class BasicFormComponent implements OnInit {
 
   onBMIClick() {
     console.log('calculating...');
+
+    console.log(this.weight.value, this.height.value);
+
+    if (this.BMIForm.invalid) {
+      this.toastr.error(
+        'Weight or Height values are not valid!',
+        'Invalid values'
+      );
+
+      return;
+    }
+
+    const heightInM = this.height.value / 100;
+
+    const bmi = this.weight.value / (heightInM * heightInM);
+    let bmiCategory: string;
+
+    if (bmi < 18.5) {
+      bmiCategory = 'Underweight';
+    } else if (bmi >= 18.5 && bmi < 25) {
+      bmiCategory = 'Healty weight';
+    } else if (bmi >= 25 && bmi < 30) {
+      bmiCategory = 'Overweight';
+    } else if (bmi >= 30) {
+      bmiCategory = 'Obesity';
+    }
+
+    this.resBMICalc = `${bmi.toFixed(1)} - ${bmiCategory}`;
   }
 }
