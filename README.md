@@ -40,13 +40,13 @@
     
 ## Part 2: validation
 1. From the form created in part 1, add validation message when error input added
-    - [ ] display error in forms when user enters wrong type in forms
+    - [x] display error in forms when user enters wrong type in forms
 
 2. Display error message when clicking submit, but the form is invalid
-    - [ ] prompt using toastr invalid to user when onSubmit()
+    - [x] prompt using toastr invalid to user when onSubmit()
 
 2. click submit button to display success message when the form is valid.
-    - [ ] if form is valid, display success prompt using toastr when onSubmit()
+    - [x] if form is valid, display success prompt using toastr when onSubmit()
 
 3. library involves:
     - bootstrap 5
