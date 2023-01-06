@@ -71,7 +71,9 @@
 
 ## Part 5: RXJS basic
 1. From the function that you created in basic angular form part 3, make it asynchronous (sequential) using RXJS observable. (using mergeMap, concatMap, Observable, etc.)
+    - [x] string concat operation is placed in an observable and is only executed when interval has passed. subscription to observable necessary to observe stream.
 2. Prove the function run sequential using console.log()
+    - [x] done
 
 
 
