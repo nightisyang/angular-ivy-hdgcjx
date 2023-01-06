@@ -33,6 +33,7 @@ export class BasicFormComponent implements OnInit {
   // basicForm contains a group of values and these values are FormControl <any> types
   // assign type from BasicFormType interface
   basicForm: FormGroup<BasicFormInterface>;
+  nameForm: FormGroup;
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -57,6 +58,7 @@ export class BasicFormComponent implements OnInit {
   ngOnInit() {
     // create and init the form
     this.initForm();
+    this.initNameForm();
   }
 
   initForm() {
@@ -80,6 +82,13 @@ export class BasicFormComponent implements OnInit {
         Validators.min(1),
         Validators.max(120),
       ]),
+    });
+  }
+
+  initNameForm() {
+    this.nameForm = this.fb.group({
+      firstname: new FormControl(''),
+      lastname: new FormControl(''),
     });
   }
 
