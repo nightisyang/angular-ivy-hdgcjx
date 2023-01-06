@@ -224,5 +224,7 @@ export class BasicFormComponent implements OnInit {
     }
 
     this.resBMICalc = `${bmi.toFixed(1)} - ${bmiCategory}`;
+
+    this.toastr.success(`You are ${bmiCategory}!`, 'BMI Calculated!');
   }
 }
