@@ -61,4 +61,9 @@
 5. Display the result from the event listener 
     - [x] function takes values from two input fields, concat and calcs respectively and outputs result
 
+##Part 4: Disable and enable input
+1. With the form and inputs created, create an additional button.
+2. Add an event listener to the button, to make the inputs enabled all, disabled all, disabled partially, and enable partially.
+3. Console log the form value (including the disabled inputs). tips: use getRawValue() for disabled inputs
+
 
