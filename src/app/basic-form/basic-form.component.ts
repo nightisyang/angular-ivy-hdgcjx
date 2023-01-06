@@ -47,8 +47,7 @@ export class BasicFormComponent implements OnInit {
       method: () => {
         console.log('disabling all...');
         this.basicForm.disable();
-        console.log('basicForm Val:', this.basicForm.value);
-        console.log('basicForm rawVal :', this.basicForm.getRawValue());
+        this.basicFormValRawVal();
       },
     },
     1: {
@@ -57,18 +56,18 @@ export class BasicFormComponent implements OnInit {
       method: () => {
         console.log('enabling all...');
         this.basicForm.enable();
-        console.log('basicForm Val:', this.basicForm.value);
-        console.log('basicForm rawVal :', this.basicForm.getRawValue());
+        this.basicFormValRawVal();
       },
     },
     2: {
       btnName: 'Disable Name Input',
       btnClass: 'btn-danger',
       method: () => {
-        console.log('disabling name...');
+        console.log(
+          'disabling name... watch name property dissapear in basicForm.val'
+        );
         this.name.disable();
-        console.log('name Val:', this.name.value);
-        console.log('name rawVal:', this.name.getRawValue());
+        this.basicFormValRawVal();
       },
     },
     3: {
@@ -77,10 +76,13 @@ export class BasicFormComponent implements OnInit {
       method: () => {
         console.log('enabling name...');
         this.name.enable();
-        console.log('name :', this.name.value);
-        console.log('name rawVal:', this.name.getRawValue());
+        this.basicFormValRawVal();
       },
     },
+  };
+  basicFormValRawVal = (): void => {
+    console.log('basicForm Val:', this.basicForm.value);
+    console.log('basicForm rawVal :', this.basicForm.getRawValue());
   };
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
