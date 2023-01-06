@@ -155,3 +155,62 @@
     <p>LastName Error: {{ lastname.errors | json }}</p>
   </div>
 </div>
+
+<div class="container p-5">
+  <h1 class="p-2">BMI Calculation</h1>
+  <form [formGroup]="nameForm">
+    <!-- FIRST NAME -->
+    <div class="row mb-2">
+      <label label for="weightBMI" class="col-4 col-form-label"
+        >Weight (kg)</label
+      >
+      <div class="col-8">
+        <input
+          type="text"
+          class="form-control"
+          id="weightBMI"
+          formControlName="firstname"
+          placeholder="Your Weight (kg)"
+        />
+      </div>
+    </div>
+    <!-- LAST NAME -->
+    <div class="row mb-2">
+      <label label for="heightBMI" class="col-4 col-form-label"
+        >Height (cm)</label
+      >
+      <div class="col-8">
+        <input
+          type="text"
+          class="form-control"
+          id="heightBMI"
+          formControlName="lastname"
+          placeholder="Your Height (cm)"
+        />
+      </div>
+    </div>
+    <!-- OUTPUT -->
+    <div class="row mb-2">
+      <label label for="nameoutput" class="col-4 col-form-label">BMI</label>
+      <div class="col-8">
+        <input
+          type="text"
+          class="form-control"
+          id="nameoutput"
+          placeholder="Result"
+          value="{{ resBMICalc }}"
+        />
+      </div>
+    </div>
+    <button (click)="onNameClick()" class="col-5 btn btn-primary">
+      Calculate BMI
+    </button>
+  </form>
+
+  <div>
+    <p>Name Value: {{ nameForm.value | json }}</p>
+    <p>Name Valid: {{ nameForm.valid | json }}</p>
+    <p>Firstname Error: {{ firstname.errors | json }}</p>
+    <p>LastName Error: {{ lastname.errors | json }}</p>
+  </div>
+</div>

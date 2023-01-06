@@ -9,6 +9,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { BasicFormInterface } from '../interface/basic-form-model';
 import { FirstLastNameInterface } from '../interface/firstlast-name-model';
+import { BMIInterface } from '../interface/bmi-form-model';
 
 /** Place Model/Interface in separate folder
  * interface model for basicForm
@@ -35,7 +36,9 @@ export class BasicFormComponent implements OnInit {
   // assign type from BasicFormType interface
   basicForm: FormGroup<BasicFormInterface>;
   nameForm: FormGroup<FirstLastNameInterface>;
+  BMIForm: FormGroup<BMIInterface>;
   resNameConcat: string;
+  resBMICalc: number;
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -61,6 +64,7 @@ export class BasicFormComponent implements OnInit {
     // create and init the form
     this.initForm();
     this.initNameForm();
+    this.initBMIForm();
   }
 
   initForm() {
@@ -91,6 +95,19 @@ export class BasicFormComponent implements OnInit {
     this.nameForm = this.fb.group({
       firstname: new FormControl<string | null>('', Validators.required),
       lastname: new FormControl<string | null>('', Validators.required),
+    });
+  }
+
+  initBMIForm() {
+    this.BMIForm = this.fb.group({
+      weight: new FormControl<number | null>(null, [
+        Validators.required,
+        Validators.min(0),
+      ]),
+      height: new FormControl<number | null>(null, [
+        Validators.required,
+        Validators.min(0),
+      ]),
     });
   }
 
