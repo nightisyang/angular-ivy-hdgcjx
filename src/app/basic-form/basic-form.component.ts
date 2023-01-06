@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+
 import { BasicFormInterface } from '../interface/basic-form-model';
 import { FirstLastNameInterface } from '../interface/firstlast-name-model';
 import { BMIInterface } from '../interface/bmi-form-model';
@@ -231,6 +233,7 @@ export class BasicFormComponent implements OnInit {
   }
 
   onNameClick() {
+    console.log('button pressed');
     // const firstnameCtrl = this.nameForm.controls.firstname;
     // const lastnameCtrl = this.nameForm.controls.lastname;
     // console.log(firstnameCtrl.value, lastnameCtrl.value);
@@ -244,11 +247,42 @@ export class BasicFormComponent implements OnInit {
       return;
     }
 
+    // https://www.learnrxjs.io/learn-rxjs/operators/creation/create
+
+    const concatObsrv = Observable.create((observer) => {
+      let value = 0;
+
+      const interval = setInterval(() => {
+        if (value % 2 === 0) {
+          observer.next(value);
+          // concatenate firstname and lastname after two seconds
+          // this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
+          // this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
+        }
+
+        if (value === 10) {
+          console.log('executing string concat');
+          this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
+          this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
+        }
+        value++;
+      }, 1000);
+
+      return () => clearInterval(interval);
+    });
+
+    const subscribe = concatObsrv.subscribe((val) => console.log(val));
+
+    setTimeout(() => {
+      subscribe.unsubscribe();
+    }, 11000);
+
     // concatenate firstname and lastname
-    this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
+    // this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
 
     // names valid, prompt success
-    this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
+    // this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
+    console.log('this log is at the end of function');
   }
 
   onBMIClick() {
