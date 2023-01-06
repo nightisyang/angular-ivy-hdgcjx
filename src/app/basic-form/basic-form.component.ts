@@ -59,14 +59,14 @@ export class BasicFormComponent implements OnInit {
       btnName: 'Disable Name Input',
       btnClass: 'btn-danger',
       method: () => {
-        this.basicForm.controls.name.disable();
+        this.name.disable();
       },
     },
     3: {
       btnName: 'Enable Name Input',
       btnClass: 'btn-primary',
       method: () => {
-        this.basicForm.controls.name.enable();
+        this.name.enable();
       },
     },
   };
@@ -191,8 +191,8 @@ export class BasicFormComponent implements OnInit {
     // const ageControl = this.basicForm.get('age');
 
     // use this to allow compiler to detect error, 'name' might be mispelled in .get('name')
-    const nameControl = this.basicForm.controls.name;
-    const ageControl = this.basicForm.controls.age;
+    // const nameControl = this.basicForm.controls.name;
+    // const ageControl = this.basicForm.controls.age;
 
     // assigning the wrong types not possible due to type safety from inferred type from FormBuilder
     // console.log(nameControl.setValue(1)); // expected to error out
@@ -200,8 +200,8 @@ export class BasicFormComponent implements OnInit {
 
     // resets form value after submission
 
-    nameControl.reset();
-    ageControl.reset();
+    this.name.reset();
+    this.age.reset();
   }
 
   onDisableInput() {
@@ -216,12 +216,12 @@ export class BasicFormComponent implements OnInit {
   }
 
   onNameClick() {
-    const firstnameCtrl = this.nameForm.controls.firstname;
-    const lastnameCtrl = this.nameForm.controls.lastname;
-    console.log(firstnameCtrl.value, lastnameCtrl.value);
+    // const firstnameCtrl = this.nameForm.controls.firstname;
+    // const lastnameCtrl = this.nameForm.controls.lastname;
+    // console.log(firstnameCtrl.value, lastnameCtrl.value);
 
     // error handling, if invalid prompt invalid and return
-    if (firstnameCtrl.invalid || lastnameCtrl.invalid) {
+    if (this.nameForm.invalid) {
       this.toastr.error(
         'Please enter a valid firstname or lastname',
         'Invalid names'
@@ -230,7 +230,7 @@ export class BasicFormComponent implements OnInit {
     }
 
     // concatenate firstname and lastname
-    this.resNameConcat = `${firstnameCtrl.value} ${lastnameCtrl.value}`;
+    this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
 
     // names valid, prompt success
     this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
