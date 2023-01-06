@@ -95,7 +95,15 @@ export class BasicFormComponent implements OnInit {
     console.log('submitted');
     // logs out value of form
     const basicFormVal = this.basicForm.value;
-    console.log(basicFormVal);
+    console.log(basicFormVal, this.basicForm.valid);
+
+    if (this.basicForm.invalid) {
+      this.toastr.warning(
+        'Values entered are not valid, please re-enter values',
+        'Invalid Form'
+      );
+      return
+    }
 
     // toastr prompt
     this.toastr.success(
