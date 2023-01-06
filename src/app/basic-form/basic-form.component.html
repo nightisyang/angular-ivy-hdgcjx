@@ -98,3 +98,52 @@
   <p>Name Error: {{ name.errors | json }}</p>
   <p>Age Error: {{ age.errors | json }}</p>
 </div>
+
+<div class="container p-5">
+  <h1 class="p-2">Name Concatenation</h1>
+  <form>
+    <!-- FIRST NAME -->
+    <div class="row mb-2">
+      <label label for="firstname" class="col-4 col-form-label"
+        >First Name</label
+      >
+      <div class="col-8">
+        <input
+          type="text"
+          class="form-control"
+          id="firstname"
+          formControlName="firstname"
+          placeholder="First Name"
+        />
+      </div>
+    </div>
+    <!-- LAST NAME -->
+    <div class="row mb-2">
+      <label label for="lastname" class="col-4 col-form-label">Last Name</label>
+      <div class="col-8">
+        <input
+          type="text"
+          class="form-control"
+          id="lastname"
+          formControlName="lastname"
+          placeholder="Last Name"
+        />
+      </div>
+    </div>
+    <!-- OUTPUT -->
+    <div class="row mb-2">
+      <label label for="nameoutput" class="col-4 col-form-label">Output</label>
+      <div class="col-8">
+        <input
+          type="text"
+          class="form-control"
+          id="nameoutput"
+          formControlName="nameoutput"
+          placeholder="Output"
+          value="bind to something"
+        />
+      </div>
+    </div>
+    <button class="col-5 btn btn-primary">Join Names</button>
+  </form>
+</div>
