@@ -127,6 +127,14 @@ export class BasicFormComponent implements OnInit {
     return this.nameForm.controls.lastname;
   }
 
+  get weight() {
+    return this.BMIForm.controls.weight;
+  }
+
+  get height() {
+    return this.BMIForm.controls.height;
+  }
+
   onSubmit() {
     console.log('submitted');
     // logs out value of form
@@ -184,5 +192,9 @@ export class BasicFormComponent implements OnInit {
 
     // names valid, prompt success
     this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
+  }
+
+  onBMIClick() {
+    console.log('calculating...');
   }
 }

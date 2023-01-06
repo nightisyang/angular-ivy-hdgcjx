@@ -99,6 +99,7 @@
   <p>Age Error: {{ age.errors | json }}</p>
 </div>
 
+<!-- Name Concat -->
 <div class="container p-5">
   <h1 class="p-2">Name Concatenation</h1>
   <form [formGroup]="nameForm">
@@ -140,6 +141,7 @@
           id="nameoutput"
           placeholder="Result"
           value="{{ resNameConcat }}"
+          readonly
         />
       </div>
     </div>
@@ -156,35 +158,36 @@
   </div>
 </div>
 
+<!-- BMI Calc -->
 <div class="container p-5">
   <h1 class="p-2">BMI Calculation</h1>
-  <form [formGroup]="nameForm">
-    <!-- FIRST NAME -->
+  <form [formGroup]="BMIForm">
+    <!-- Weight -->
     <div class="row mb-2">
       <label label for="weightBMI" class="col-4 col-form-label"
         >Weight (kg)</label
       >
       <div class="col-8">
         <input
-          type="text"
+          type="number"
           class="form-control"
           id="weightBMI"
-          formControlName="firstname"
+          formControlName="weight"
           placeholder="Your Weight (kg)"
         />
       </div>
     </div>
-    <!-- LAST NAME -->
+    <!-- Height -->
     <div class="row mb-2">
       <label label for="heightBMI" class="col-4 col-form-label"
         >Height (cm)</label
       >
       <div class="col-8">
         <input
-          type="text"
+          type="number"
           class="form-control"
           id="heightBMI"
-          formControlName="lastname"
+          formControlName="height"
           placeholder="Your Height (cm)"
         />
       </div>
@@ -194,23 +197,24 @@
       <label label for="nameoutput" class="col-4 col-form-label">BMI</label>
       <div class="col-8">
         <input
-          type="text"
+          type="number"
           class="form-control"
           id="nameoutput"
           placeholder="Result"
           value="{{ resBMICalc }}"
+          readonly
         />
       </div>
     </div>
-    <button (click)="onNameClick()" class="col-5 btn btn-primary">
+    <button (click)="onBMIClick()" class="col-5 btn btn-primary">
       Calculate BMI
     </button>
   </form>
 
   <div>
-    <p>Name Value: {{ nameForm.value | json }}</p>
-    <p>Name Valid: {{ nameForm.valid | json }}</p>
-    <p>Firstname Error: {{ firstname.errors | json }}</p>
-    <p>LastName Error: {{ lastname.errors | json }}</p>
+    <p>BMI Value: {{ BMIForm.value | json }}</p>
+    <p>BMI Valid: {{ BMIForm.valid | json }}</p>
+    <p>Weight Error: {{ weight.errors | json }}</p>
+    <p>Height Error: {{ height.errors | json }}</p>
   </div>
 </div>
