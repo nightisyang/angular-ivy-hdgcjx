@@ -101,7 +101,7 @@
 
 <div class="container p-5">
   <h1 class="p-2">Name Concatenation</h1>
-  <form>
+  <form [formGroup]="nameForm">
     <!-- FIRST NAME -->
     <div class="row mb-2">
       <label label for="firstname" class="col-4 col-form-label"
@@ -138,7 +138,6 @@
           type="text"
           class="form-control"
           id="nameoutput"
-          formControlName="nameoutput"
           placeholder="Output"
           value="bind to something"
         />
@@ -146,4 +145,11 @@
     </div>
     <button class="col-5 btn btn-primary">Join Names</button>
   </form>
+</div>
+
+<div>
+  <p>Name Value: {{ nameForm.value | json }}</p>
+  <p>Name Valid: {{ nameForm.valid | json }}</p>
+  <p>Firstname Error: {{ firstname.errors | json }}</p>
+  <p>LastName Error: {{ lastname.errors | json }}</p>
 </div>
