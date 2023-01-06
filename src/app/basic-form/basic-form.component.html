@@ -138,18 +138,20 @@
           type="text"
           class="form-control"
           id="nameoutput"
-          placeholder="Output"
-          value="bind to something"
+          placeholder="Result"
+          value="{{ resNameConcat }}"
         />
       </div>
     </div>
-    <button class="col-5 btn btn-primary">Join Names</button>
+    <button (click)="onNameClick()" class="col-5 btn btn-primary">
+      Join Names
+    </button>
   </form>
-</div>
 
-<div>
-  <p>Name Value: {{ nameForm.value | json }}</p>
-  <p>Name Valid: {{ nameForm.valid | json }}</p>
-  <p>Firstname Error: {{ firstname.errors | json }}</p>
-  <p>LastName Error: {{ lastname.errors | json }}</p>
+  <div>
+    <p>Name Value: {{ nameForm.value | json }}</p>
+    <p>Name Valid: {{ nameForm.valid | json }}</p>
+    <p>Firstname Error: {{ firstname.errors | json }}</p>
+    <p>LastName Error: {{ lastname.errors | json }}</p>
+  </div>
 </div>

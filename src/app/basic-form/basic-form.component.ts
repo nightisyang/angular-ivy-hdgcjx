@@ -35,6 +35,7 @@ export class BasicFormComponent implements OnInit {
   // assign type from BasicFormType interface
   basicForm: FormGroup<BasicFormInterface>;
   nameForm: FormGroup<FirstLastNameInterface>;
+  resNameConcat: string;
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -145,5 +146,26 @@ export class BasicFormComponent implements OnInit {
 
     nameControl.reset();
     ageControl.reset();
+  }
+
+  onNameClick() {
+    const firstnameCtrl = this.nameForm.controls.firstname;
+    const lastnameCtrl = this.nameForm.controls.lastname;
+    console.log(firstnameCtrl.value, lastnameCtrl.value);
+
+    // error handling, if invalid prompt invalid and return
+    if (firstnameCtrl.invalid || lastnameCtrl.invalid) {
+      this.toastr.error(
+        'Please enter a valid firstname or lastname',
+        'Invalid names'
+      );
+      return;
+    }
+
+    // concatenate firstname and lastname
+    this.resNameConcat = `${firstnameCtrl.value} ${lastnameCtrl.value}`;
+
+    // names valid, prompt success
+    this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
   }
 }
