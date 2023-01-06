@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   UntypedFormGroup,
@@ -26,7 +26,7 @@ import { BMIInterface } from '../interface/bmi-form-model';
   templateUrl: './basic-form.component.html',
   styleUrls: ['./basic-form.component.css'],
 })
-export class BasicFormComponent implements OnInit {
+export class BasicFormComponent implements OnInit, AfterViewInit, OnDestroy {
   // UntypedFormGroup is a non-strongly-typed version of FormGroup
   // basicForm: UntypedFormGroup;
 
@@ -86,6 +86,10 @@ export class BasicFormComponent implements OnInit {
     console.log('basicForm Val:', this.basicForm.value);
     console.log('basicForm rawVal :', this.basicForm.getRawValue());
   };
+  surprise: boolean = false;
+  toggleSurprise() {
+    this.surprise = !this.surprise;
+  }
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -112,6 +116,14 @@ export class BasicFormComponent implements OnInit {
     this.initForm();
     this.initNameForm();
     this.initBMIForm();
+  }
+
+  ngAfterViewInit() {
+    this.toastr.success('View loaded!');
+  }
+
+  ngOnDestroy() {
+    this.toastr.error('View destroyed');
   }
 
   initForm() {
@@ -312,7 +324,7 @@ export class BasicFormComponent implements OnInit {
     } else if (bmi >= 25 && bmi < 30) {
       bmiCategory = 'Overweight';
     } else if (bmi >= 30) {
-      bmiCategory = 'Obesity';
+      bmiCategory = 'Obese';
     }
 
     this.resBMICalc = `${bmi.toFixed(1)} - ${bmiCategory}`;
