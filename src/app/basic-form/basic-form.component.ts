@@ -39,6 +39,37 @@ export class BasicFormComponent implements OnInit {
   BMIForm: FormGroup<BMIInterface>;
   resNameConcat: string;
   resBMICalc: string;
+  toggleVal: number = 0;
+  toggle = {
+    0: {
+      btnName: 'Disable All Inputs',
+      btnClass: 'btn-danger',
+      method: () => {
+        this.basicForm.disable();
+      },
+    },
+    1: {
+      btnName: 'Enable All Inputs',
+      btnClass: 'btn-primary',
+      method: () => {
+        this.basicForm.enable();
+      },
+    },
+    2: {
+      btnName: 'Disable Name Input',
+      btnClass: 'btn-danger',
+      method: () => {
+        this.basicForm.controls.name.disable();
+      },
+    },
+    3: {
+      btnName: 'Enable Name Input',
+      btnClass: 'btn-primary',
+      method: () => {
+        this.basicForm.controls.name.enable();
+      },
+    },
+  };
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -171,6 +202,17 @@ export class BasicFormComponent implements OnInit {
 
     nameControl.reset();
     ageControl.reset();
+  }
+
+  onDisableInput() {
+    // this.basicForm.disable();
+    // console.log(this.toggle[this.toggleVal], this.toggle, this.toggleVal);
+    this.toggle[this.toggleVal].method();
+
+    this.toggleVal++;
+    if (this.toggleVal === 4) {
+      this.toggleVal = 0;
+    }
   }
 
   onNameClick() {
