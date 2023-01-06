@@ -26,7 +26,7 @@ import { BMIInterface } from '../interface/bmi-form-model';
   templateUrl: './basic-form.component.html',
   styleUrls: ['./basic-form.component.css'],
 })
-export class BasicFormComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BasicFormComponent implements OnInit, AfterViewInit {
   // UntypedFormGroup is a non-strongly-typed version of FormGroup
   // basicForm: UntypedFormGroup;
 
@@ -120,10 +120,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.toastr.success('View loaded!');
-  }
-
-  ngOnDestroy() {
-    this.toastr.error('View destroyed');
   }
 
   initForm() {
