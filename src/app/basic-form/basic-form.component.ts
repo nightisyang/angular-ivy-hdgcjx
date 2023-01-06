@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BasicFormInterface } from '../interface/basic-form-model';
+import { FirstLastNameInterface } from '../interface/firstlast-name-model';
+import { BMIInterface } from '../interface/bmi-form-model';
 
 /** Place Model/Interface in separate folder
  * interface model for basicForm
@@ -33,6 +35,10 @@ export class BasicFormComponent implements OnInit {
   // basicForm contains a group of values and these values are FormControl <any> types
   // assign type from BasicFormType interface
   basicForm: FormGroup<BasicFormInterface>;
+  nameForm: FormGroup<FirstLastNameInterface>;
+  BMIForm: FormGroup<BMIInterface>;
+  resNameConcat: string;
+  resBMICalc: string;
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -57,6 +63,8 @@ export class BasicFormComponent implements OnInit {
   ngOnInit() {
     // create and init the form
     this.initForm();
+    this.initNameForm();
+    this.initBMIForm();
   }
 
   initForm() {
@@ -83,12 +91,48 @@ export class BasicFormComponent implements OnInit {
     });
   }
 
+  initNameForm() {
+    this.nameForm = this.fb.group({
+      firstname: new FormControl<string | null>('', Validators.required),
+      lastname: new FormControl<string | null>('', Validators.required),
+    });
+  }
+
+  initBMIForm() {
+    this.BMIForm = this.fb.group({
+      weight: new FormControl<number | null>(null, [
+        Validators.required,
+        Validators.min(0),
+      ]),
+      height: new FormControl<number | null>(null, [
+        Validators.required,
+        Validators.min(0),
+      ]),
+    });
+  }
+
   get name() {
     return this.basicForm.controls.name;
   }
 
   get age() {
     return this.basicForm.controls.age;
+  }
+
+  get firstname() {
+    return this.nameForm.controls.firstname;
+  }
+
+  get lastname() {
+    return this.nameForm.controls.lastname;
+  }
+
+  get weight() {
+    return this.BMIForm.controls.weight;
+  }
+
+  get height() {
+    return this.BMIForm.controls.height;
   }
 
   onSubmit() {
@@ -127,5 +171,60 @@ export class BasicFormComponent implements OnInit {
 
     nameControl.reset();
     ageControl.reset();
+  }
+
+  onNameClick() {
+    const firstnameCtrl = this.nameForm.controls.firstname;
+    const lastnameCtrl = this.nameForm.controls.lastname;
+    console.log(firstnameCtrl.value, lastnameCtrl.value);
+
+    // error handling, if invalid prompt invalid and return
+    if (firstnameCtrl.invalid || lastnameCtrl.invalid) {
+      this.toastr.error(
+        'Please enter a valid firstname or lastname',
+        'Invalid names'
+      );
+      return;
+    }
+
+    // concatenate firstname and lastname
+    this.resNameConcat = `${firstnameCtrl.value} ${lastnameCtrl.value}`;
+
+    // names valid, prompt success
+    this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
+  }
+
+  onBMIClick() {
+    console.log('calculating...');
+
+    console.log(this.weight.value, this.height.value);
+
+    if (this.BMIForm.invalid) {
+      this.toastr.error(
+        'Weight or Height values are not valid!',
+        'Invalid values'
+      );
+
+      return;
+    }
+
+    const heightInM = this.height.value / 100;
+
+    const bmi = this.weight.value / (heightInM * heightInM);
+    let bmiCategory: string;
+
+    if (bmi < 18.5) {
+      bmiCategory = 'Underweight';
+    } else if (bmi >= 18.5 && bmi < 25) {
+      bmiCategory = 'Healty weight';
+    } else if (bmi >= 25 && bmi < 30) {
+      bmiCategory = 'Overweight';
+    } else if (bmi >= 30) {
+      bmiCategory = 'Obesity';
+    }
+
+    this.resBMICalc = `${bmi.toFixed(1)} - ${bmiCategory}`;
+
+    this.toastr.success(`You are ${bmiCategory}!`, 'BMI Calculated!');
   }
 }

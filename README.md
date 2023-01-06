@@ -53,5 +53,12 @@
     - angular form group
     - toastr
 
+## Part 3: Event Listener
+1. Add an event listener to the at least 2 of the input eg. string concatenation, bmi calculation 
+    - [x] Implemented both examples
+3. With every changes on the value, run event listener 
+    - [x] Listening to click event on button , call function
+5. Display the result from the event listener 
+    - [x] function takes values from two input fields, concat and calcs respectively and outputs result
 
 
