@@ -45,28 +45,40 @@ export class BasicFormComponent implements OnInit {
       btnName: 'Disable All Inputs',
       btnClass: 'btn-danger',
       method: () => {
+        console.log('disabling all...');
         this.basicForm.disable();
+        console.log('basicForm Val:', this.basicForm.value);
+        console.log('basicForm rawVal :', this.basicForm.getRawValue());
       },
     },
     1: {
       btnName: 'Enable All Inputs',
       btnClass: 'btn-primary',
       method: () => {
+        console.log('enabling all...');
         this.basicForm.enable();
+        console.log('basicForm Val:', this.basicForm.value);
+        console.log('basicForm rawVal :', this.basicForm.getRawValue());
       },
     },
     2: {
       btnName: 'Disable Name Input',
       btnClass: 'btn-danger',
       method: () => {
+        console.log('disabling name...');
         this.name.disable();
+        console.log('name Val:', this.name.value);
+        console.log('name rawVal:', this.name.getRawValue());
       },
     },
     3: {
       btnName: 'Enable Name Input',
       btnClass: 'btn-primary',
       method: () => {
+        console.log('enabling name...');
         this.name.enable();
+        console.log('name :', this.name.value);
+        console.log('name rawVal:', this.name.getRawValue());
       },
     },
   };
@@ -114,7 +126,7 @@ export class BasicFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
-      age: new FormControl<number | null>(null, [
+      age: new FormControl<number | null>(0, [
         Validators.required,
         Validators.min(1),
         Validators.max(120),
