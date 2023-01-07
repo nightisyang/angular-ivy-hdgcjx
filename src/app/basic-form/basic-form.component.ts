@@ -7,10 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 
 import { BasicFormInterface } from '../interface/basic-form-model';
-import { FirstLastNameInterface } from '../interface/firstlast-name-model';
 import { BMIInterface } from '../interface/bmi-form-model';
 
 /** Place Model/Interface in separate folder
@@ -37,9 +35,7 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
   // basicForm contains a group of values and these values are FormControl <any> types
   // assign type from BasicFormType interface
   basicForm: FormGroup<BasicFormInterface>;
-  nameForm: FormGroup<FirstLastNameInterface>;
   BMIForm: FormGroup<BMIInterface>;
-  resNameConcat: string;
   resBMICalc: string;
   toggleVal: number = 0;
   toggle = {
@@ -114,7 +110,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // create and init the form
     this.initForm();
-    this.initNameForm();
     this.initBMIForm();
   }
 
@@ -149,12 +144,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     });
   }
 
-  initNameForm() {
-    this.nameForm = this.fb.group({
-      firstname: new FormControl<string | null>('', Validators.required),
-      lastname: new FormControl<string | null>('', Validators.required),
-    });
-  }
 
   initBMIForm() {
     this.BMIForm = this.fb.group({
@@ -177,13 +166,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     return this.basicForm.controls.age;
   }
 
-  get firstname() {
-    return this.nameForm.controls.firstname;
-  }
-
-  get lastname() {
-    return this.nameForm.controls.lastname;
-  }
 
   get weight() {
     return this.BMIForm.controls.weight;
@@ -243,59 +225,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onNameClick() {
-    console.log('button pressed');
-
-    // error handling, if invalid prompt invalid and return
-    if (this.nameForm.invalid) {
-      this.toastr.error(
-        'Please enter a valid firstname or lastname',
-        'Invalid names'
-      );
-      return;
-    }
-
-    // https://www.learnrxjs.io/learn-rxjs/operators/creation/create
-    // making an observable
-    const concatObsrv = Observable.create((observer) => {
-      let value = 0;
-
-      const interval = setInterval(() => {
-        // emit a value every 2 seconds
-        if (value % 2 === 0) {
-          observer.next(value);
-        }
-
-        // execute the following when 10 seconds has passed
-        if (value === 10) {
-          console.log('executing string concat');
-          this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
-          this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
-        }
-
-        // increment value every 1000ms interval
-        value++;
-      }, 1000);
-
-      // observable returns clearInterval when unsubscribed
-      return () => clearInterval(interval);
-    });
-
-    // initiate subscription to observable
-    const subscribe = concatObsrv.subscribe((val) => console.log(val));
-
-    // after 11 seconds, unsubscribe, concatObsrv will return clearInterval
-    setTimeout(() => {
-      subscribe.unsubscribe();
-    }, 11000);
-
-    // concatenate firstname and lastname
-    // this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
-
-    // names valid, prompt success
-    // this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
-    console.log('this log is at the end of function');
-  }
 
   onBMIClick() {
     console.log('calculating...');
