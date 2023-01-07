@@ -11,7 +11,7 @@ export class HelloComponent implements OnInit, OnDestroy {
   @Input() name: string;
 
   ngOnInit() {
-    this.toastr.success('Hello!', 'Greeting from ngOnInit()');
+    this.toastr.success('Hello!', 'Greetings from <hello> ngOnInit()');
   }
 
   ngOnDestroy() {
