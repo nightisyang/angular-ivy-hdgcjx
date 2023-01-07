@@ -35,8 +35,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
   // basicForm contains a group of values and these values are FormControl <any> types
   // assign type from BasicFormType interface
   basicForm: FormGroup<BasicFormInterface>;
-  BMIForm: FormGroup<BMIInterface>;
-  resBMICalc: string;
   toggleVal: number = 0;
   toggle = {
     0: {
@@ -82,10 +80,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     console.log('basicForm Val:', this.basicForm.value);
     console.log('basicForm rawVal :', this.basicForm.getRawValue());
   };
-  surprise: boolean = false;
-  toggleSurprise() {
-    this.surprise = !this.surprise;
-  }
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -110,7 +104,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // create and init the form
     this.initForm();
-    this.initBMIForm();
   }
 
   ngAfterViewInit() {
@@ -144,35 +137,12 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     });
   }
 
-
-  initBMIForm() {
-    this.BMIForm = this.fb.group({
-      weight: new FormControl<number | null>(null, [
-        Validators.required,
-        Validators.min(0),
-      ]),
-      height: new FormControl<number | null>(null, [
-        Validators.required,
-        Validators.min(0),
-      ]),
-    });
-  }
-
   get name() {
     return this.basicForm.controls.name;
   }
 
   get age() {
     return this.basicForm.controls.age;
-  }
-
-
-  get weight() {
-    return this.BMIForm.controls.weight;
-  }
-
-  get height() {
-    return this.BMIForm.controls.height;
   }
 
   onSubmit() {
@@ -223,40 +193,5 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     if (this.toggleVal === 4) {
       this.toggleVal = 0;
     }
-  }
-
-
-  onBMIClick() {
-    console.log('calculating...');
-
-    console.log(this.weight.value, this.height.value);
-
-    if (this.BMIForm.invalid) {
-      this.toastr.error(
-        'Weight or Height values are not valid!',
-        'Invalid values'
-      );
-
-      return;
-    }
-
-    const heightInM = this.height.value / 100;
-
-    const bmi = this.weight.value / (heightInM * heightInM);
-    let bmiCategory: string;
-
-    if (bmi < 18.5) {
-      bmiCategory = 'Underweight';
-    } else if (bmi >= 18.5 && bmi < 25) {
-      bmiCategory = 'Healty weight';
-    } else if (bmi >= 25 && bmi < 30) {
-      bmiCategory = 'Overweight';
-    } else if (bmi >= 30) {
-      bmiCategory = 'Obese';
-    }
-
-    this.resBMICalc = `${bmi.toFixed(1)} - ${bmiCategory}`;
-
-    this.toastr.success(`You are ${bmiCategory}!`, 'BMI Calculated!');
   }
 }

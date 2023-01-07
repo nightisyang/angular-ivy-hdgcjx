@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { BasicFormComponent } from './basic-form/basic-form.component';
 import { NameConcatComponent } from './name-concat/name-concat.component';
+import { BMICalcComponent } from './bmi-calc/bmi-calc.component';
+import { LifecycleDemoComponent } from './lifecycle-demo/lifecycle-demo.component';
 
 @NgModule({
   imports: [
@@ -26,6 +28,8 @@ import { NameConcatComponent } from './name-concat/name-concat.component';
     HelloComponent,
     BasicFormComponent,
     NameConcatComponent,
+    BMICalcComponent,
+    LifecycleDemoComponent,
   ],
   bootstrap: [AppComponent],
 })
