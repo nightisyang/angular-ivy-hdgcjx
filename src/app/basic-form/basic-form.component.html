@@ -99,13 +99,12 @@
       {{ toggle[toggleVal].btnName }}
     </button>
   </div>
-</div>
-
-<div>
-  <p>Form Value: {{ basicForm.value | json }}</p>
-  <p>Form Valid: {{ basicForm.valid | json }}</p>
-  <p>Name Error: {{ name.errors | json }}</p>
-  <p>Age Error: {{ age.errors | json }}</p>
+  <div>
+    <p>Form Value: {{ basicForm.value | json }}</p>
+    <p>Form Valid: {{ basicForm.valid | json }}</p>
+    <p>Name Error: {{ name.errors | json }}</p>
+    <p>Age Error: {{ age.errors | json }}</p>
+  </div>
 </div>
 
 <!-- Name Concat -->
