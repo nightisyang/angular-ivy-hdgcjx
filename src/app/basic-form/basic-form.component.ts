@@ -119,7 +119,10 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.toastr.success('View loaded!');
+    this.toastr.success(
+      'View loaded in First Change Cycle!',
+      'ngAfterViewInit()'
+    );
   }
 
   initForm() {
