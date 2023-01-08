@@ -6,6 +6,7 @@ import { LifecycleDemoComponent } from './lifecycle-demo/lifecycle-demo.componen
 import { HelloComponent } from '../hello.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'bmi', component: BMICalcComponent },
   { path: 'name-concat', component: NameConcatComponent },
   { path: 'lifecycle', component: LifecycleDemoComponent },

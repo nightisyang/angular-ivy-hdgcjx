@@ -7,7 +7,7 @@ import { BasicFormComponent } from './basic-form/basic-form.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'basic-form',
     component: BasicFormComponent,
   },
   {
