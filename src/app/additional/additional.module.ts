@@ -16,10 +16,8 @@ import { HelloComponent } from '../hello.component';
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     ToastrModule,
     AdditionalRoutingModule,
   ],
@@ -30,10 +28,6 @@ import { HelloComponent } from '../hello.component';
     HelloComponent,
   ],
   exports: [
-    NameConcatComponent,
-    BMICalcComponent,
-    LifecycleDemoComponent,
-    HelloComponent,
   ],
 })
 export class AdditionalModule {}
