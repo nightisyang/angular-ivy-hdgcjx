@@ -10,6 +10,12 @@ const routes: Routes = [
     path: '',
     component: BasicFormComponent,
   },
+  {
+    // these are lazily loaded
+    path: 'additional',
+    loadChildren: () =>
+      import('./additional/additional.module').then((m) => m.AdditionalModule),
+  },
 ];
 
 @NgModule({
