@@ -5,13 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
-import { HelloComponent } from './hello.component';
+// import { HelloComponent } from './hello.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { BasicFormComponent } from './basic-form/basic-form.component';
-import { NameConcatComponent } from './name-concat/name-concat.component';
-import { BMICalcComponent } from './bmi-calc/bmi-calc.component';
-import { LifecycleDemoComponent } from './lifecycle-demo/lifecycle-demo.component';
+import { AdditionalModule } from './additional/additional.module';
 
 @NgModule({
   imports: [
@@ -22,15 +20,9 @@ import { LifecycleDemoComponent } from './lifecycle-demo/lifecycle-demo.componen
     AppRoutingModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    AdditionalModule,
   ],
-  declarations: [
-    AppComponent,
-    HelloComponent,
-    BasicFormComponent,
-    NameConcatComponent,
-    BMICalcComponent,
-    LifecycleDemoComponent,
-  ],
+  declarations: [AppComponent, BasicFormComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

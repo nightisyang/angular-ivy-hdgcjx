@@ -8,7 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-import { BMIInterface } from '../interface/bmi-form-model';
+import { BMIInterface } from '../../interface/bmi-form-model';
 
 @Component({
   selector: 'app-bmi-calc',
@@ -79,5 +79,4 @@ export class BMICalcComponent implements OnInit {
 
     this.toastr.success(`You are ${bmiCategory}!`, 'BMI Calculated!');
   }
-
 }

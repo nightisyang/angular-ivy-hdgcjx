@@ -8,7 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-import { FirstLastNameInterface } from '../interface/firstlast-name-model';
+import { FirstLastNameInterface } from '../../interface/firstlast-name-model';
 
 @Component({
   selector: 'app-name-concat',
