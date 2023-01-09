@@ -9,7 +9,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 
 import { BasicFormInterface } from '../interface/basic-form-model';
-import { BMIInterface } from '../interface/bmi-form-model';
+// import { BMIInterface } from '../interface/bmi-form-model';
 
 /** Place Model/Interface in separate folder
  * interface model for basicForm

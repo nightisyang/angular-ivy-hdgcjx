@@ -20,7 +20,7 @@ import { AdditionalModule } from './additional/additional.module';
     AppRoutingModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    AdditionalModule,
+    // AdditionalModule, // Not necessary as this is lazily loaded in additional-routing
   ],
   declarations: [AppComponent, BasicFormComponent],
   bootstrap: [AppComponent],

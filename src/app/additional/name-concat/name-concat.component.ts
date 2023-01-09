@@ -5,7 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { of, Observable } from 'rxjs';
+import { of, Observable, mergeMap } from 'rxjs';
 import { concatMap, delay } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
@@ -61,8 +61,8 @@ export class NameConcatComponent implements OnInit {
 
     // map value from source into inner observable, when complete emit results and move to next
     const example = source.pipe(
-      concatMap((val) => of(`Delayed by: ${val}ms`).pipe(delay(val))),
-      concatMap((val) => printNameAsync(val))
+      mergeMap((val) => of(`Delayed by: ${val}ms`).pipe(delay(val))),
+      mergeMap((val) => printNameAsync(val))
     );
 
     const subscribe = example.subscribe((val) =>
