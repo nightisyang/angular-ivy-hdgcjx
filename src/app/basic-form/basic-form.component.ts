@@ -7,10 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 
 import { BasicFormInterface } from '../interface/basic-form-model';
-import { FirstLastNameInterface } from '../interface/firstlast-name-model';
 import { BMIInterface } from '../interface/bmi-form-model';
 
 /** Place Model/Interface in separate folder
@@ -37,10 +35,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
   // basicForm contains a group of values and these values are FormControl <any> types
   // assign type from BasicFormType interface
   basicForm: FormGroup<BasicFormInterface>;
-  nameForm: FormGroup<FirstLastNameInterface>;
-  BMIForm: FormGroup<BMIInterface>;
-  resNameConcat: string;
-  resBMICalc: string;
   toggleVal: number = 0;
   toggle = {
     0: {
@@ -86,10 +80,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     console.log('basicForm Val:', this.basicForm.value);
     console.log('basicForm rawVal :', this.basicForm.getRawValue());
   };
-  surprise: boolean = false;
-  toggleSurprise() {
-    this.surprise = !this.surprise;
-  }
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -114,8 +104,6 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // create and init the form
     this.initForm();
-    this.initNameForm();
-    this.initBMIForm();
   }
 
   ngAfterViewInit() {
@@ -149,48 +137,12 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     });
   }
 
-  initNameForm() {
-    this.nameForm = this.fb.group({
-      firstname: new FormControl<string | null>('', Validators.required),
-      lastname: new FormControl<string | null>('', Validators.required),
-    });
-  }
-
-  initBMIForm() {
-    this.BMIForm = this.fb.group({
-      weight: new FormControl<number | null>(null, [
-        Validators.required,
-        Validators.min(0),
-      ]),
-      height: new FormControl<number | null>(null, [
-        Validators.required,
-        Validators.min(0),
-      ]),
-    });
-  }
-
   get name() {
     return this.basicForm.controls.name;
   }
 
   get age() {
     return this.basicForm.controls.age;
-  }
-
-  get firstname() {
-    return this.nameForm.controls.firstname;
-  }
-
-  get lastname() {
-    return this.nameForm.controls.lastname;
-  }
-
-  get weight() {
-    return this.BMIForm.controls.weight;
-  }
-
-  get height() {
-    return this.BMIForm.controls.height;
   }
 
   onSubmit() {
@@ -241,93 +193,5 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     if (this.toggleVal === 4) {
       this.toggleVal = 0;
     }
-  }
-
-  onNameClick() {
-    console.log('button pressed');
-
-    // error handling, if invalid prompt invalid and return
-    if (this.nameForm.invalid) {
-      this.toastr.error(
-        'Please enter a valid firstname or lastname',
-        'Invalid names'
-      );
-      return;
-    }
-
-    // https://www.learnrxjs.io/learn-rxjs/operators/creation/create
-    // making an observable
-    const concatObsrv = Observable.create((observer) => {
-      let value = 0;
-
-      const interval = setInterval(() => {
-        // emit a value every 2 seconds
-        if (value % 2 === 0) {
-          observer.next(value);
-        }
-
-        // execute the following when 10 seconds has passed
-        if (value === 10) {
-          console.log('executing string concat');
-          this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
-          this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
-        }
-
-        // increment value every 1000ms interval
-        value++;
-      }, 1000);
-
-      // observable returns clearInterval when unsubscribed
-      return () => clearInterval(interval);
-    });
-
-    // initiate subscription to observable
-    const subscribe = concatObsrv.subscribe((val) => console.log(val));
-
-    // after 11 seconds, unsubscribe, concatObsrv will return clearInterval
-    setTimeout(() => {
-      subscribe.unsubscribe();
-    }, 11000);
-
-    // concatenate firstname and lastname
-    // this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
-
-    // names valid, prompt success
-    // this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
-    console.log('this log is at the end of function');
-  }
-
-  onBMIClick() {
-    console.log('calculating...');
-
-    console.log(this.weight.value, this.height.value);
-
-    if (this.BMIForm.invalid) {
-      this.toastr.error(
-        'Weight or Height values are not valid!',
-        'Invalid values'
-      );
-
-      return;
-    }
-
-    const heightInM = this.height.value / 100;
-
-    const bmi = this.weight.value / (heightInM * heightInM);
-    let bmiCategory: string;
-
-    if (bmi < 18.5) {
-      bmiCategory = 'Underweight';
-    } else if (bmi >= 18.5 && bmi < 25) {
-      bmiCategory = 'Healty weight';
-    } else if (bmi >= 25 && bmi < 30) {
-      bmiCategory = 'Overweight';
-    } else if (bmi >= 30) {
-      bmiCategory = 'Obese';
-    }
-
-    this.resBMICalc = `${bmi.toFixed(1)} - ${bmiCategory}`;
-
-    this.toastr.success(`You are ${bmiCategory}!`, 'BMI Calculated!');
   }
 }

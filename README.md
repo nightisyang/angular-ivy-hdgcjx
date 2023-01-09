@@ -86,6 +86,11 @@
     - [x] able to differentiate between constructor, and ngOnInit
     - [ ] bonus if able to implement additional lifecycles
 
+## Part 7: Angular routing:
+1. Implement multi page app using angular routing
+    - [ ] angular module
+    - [ ] angular routing
+    - [ ] angular lazy routing
 
 
 

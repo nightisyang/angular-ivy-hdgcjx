@@ -4,4 +4,35 @@
 </p> -->
 <!-- <app-test></app-test> -->
 <!-- <hello></hello> -->
+
+<div class="col p-2 text-center">
+  <button
+    type="button"
+    [routerLink]="['/basic-form']"
+    class="btn btn-light btn-sm m-2"
+  >
+    Basic Form
+  </button>
+  <button
+    type="button"
+    [routerLink]="['/additional/bmi']"
+    class="btn btn-light btn-sm m-2"
+  >
+    BMI Calculation
+  </button>
+  <button
+    type="button"
+    [routerLink]="['/additional/name-concat']"
+    class="btn btn-light btn-sm m-2"
+  >
+    Name Concatenation
+  </button>
+  <button
+    type="button"
+    [routerLink]="['/additional/lifecycle']"
+    class="btn btn-light btn-sm m-2"
+  >
+    Lifecycle Demo
+  </button>
+</div>
 <router-outlet></router-outlet>

@@ -1,0 +1,59 @@
+<div class="container p-5">
+  <h1 class="p-2">BMI Calculation</h1>
+  <form [formGroup]="BMIForm">
+    <!-- Weight -->
+    <div class="row mb-2">
+      <label label for="weightBMI" class="col-4 col-form-label"
+        >Weight (kg)</label
+      >
+      <div class="col-8">
+        <input
+          type="number"
+          class="form-control"
+          id="weightBMI"
+          formControlName="weight"
+          placeholder="Your Weight (kg)"
+        />
+      </div>
+    </div>
+    <!-- Height -->
+    <div class="row mb-2">
+      <label label for="heightBMI" class="col-4 col-form-label"
+        >Height (cm)</label
+      >
+      <div class="col-8">
+        <input
+          type="number"
+          class="form-control"
+          id="heightBMI"
+          formControlName="height"
+          placeholder="Your Height (cm)"
+        />
+      </div>
+    </div>
+    <!-- OUTPUT -->
+    <div class="row mb-2">
+      <label label for="nameoutput" class="col-4 col-form-label">BMI</label>
+      <div class="col-8">
+        <input
+          type="string"
+          class="form-control"
+          id="nameoutput"
+          placeholder="Result"
+          value="{{ resBMICalc }}"
+          readonly
+        />
+      </div>
+    </div>
+    <button (click)="onBMIClick()" class="col-5 btn btn-primary">
+      Calculate BMI
+    </button>
+  </form>
+
+  <div>
+    <p>BMI Value: {{ BMIForm.value | json }}</p>
+    <p>BMI Valid: {{ BMIForm.valid | json }}</p>
+    <p>Weight Error: {{ weight.errors | json }}</p>
+    <p>Height Error: {{ height.errors | json }}</p>
+  </div>
+</div>
