@@ -196,6 +196,7 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     this.name.reset();
     this.age.reset();
     this.dropdownVal.reset();
+    this.checkbox.reset();
   }
 
   onDisableInput() {
