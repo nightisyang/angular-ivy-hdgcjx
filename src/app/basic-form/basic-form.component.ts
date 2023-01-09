@@ -80,6 +80,7 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     console.log('basicForm Val:', this.basicForm.value);
     console.log('basicForm rawVal :', this.basicForm.getRawValue());
   };
+  isSelected: boolean;
 
   /** DEPRECATED https://angular.io/api/forms/FormBuilder#methods
    *FormBuilder is syntactic sugar that shortens creating instances of a FormControl, FormGroup, or FormArray, also infers types
@@ -135,6 +136,10 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
         Validators.max(120),
       ]),
       dropdownVal: new FormControl<string | null>(null, Validators.required),
+      checkbox: new FormControl<boolean>(
+        this.isSelected,
+        Validators.requiredTrue
+      ),
     });
   }
 
@@ -148,6 +153,10 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
 
   get dropdownVal() {
     return this.basicForm.controls.dropdownVal;
+  }
+
+  get checkbox() {
+    return this.basicForm.controls.checkbox;
   }
 
   onSubmit() {
@@ -205,5 +214,11 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     console.log(str);
 
     this.dropdownVal.setValue(str);
+  }
+
+  onCheckBoxChange(event: any) {
+    // event.target.checked returns true/false
+    // console.log(event.target.checked);
+    this.checkbox.setValue(event.target.checked);
   }
 }

@@ -5,7 +5,8 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
+import { concatMap, delay } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 import { FirstLastNameInterface } from '../../interface/firstlast-name-model';
@@ -44,42 +45,33 @@ export class NameConcatComponent implements OnInit {
       return;
     }
 
-    // https://www.learnrxjs.io/learn-rxjs/operators/creation/create
-    // making an observable
-    const concatObsrv = Observable.create((observer) => {
-      let value = 0;
+    // emit delay value
+    const source = of(2000, 1000);
 
-      const interval = setInterval(() => {
-        // emit a value every 2 seconds
-        if (value % 2 === 0) {
-          observer.next(value);
-        }
+    const printNameAsync = (val) => {
+      return new Observable((subscribe) => {
+        console.log(val);
+        this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
+        this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
 
-        // execute the following when 10 seconds has passed
-        if (value === 10) {
-          console.log('executing string concat');
-          this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
-          this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
-        }
+        subscribe.next(this.resNameConcat);
+        subscribe.complete();
+      });
+    };
 
-        // increment value every 1000ms interval
-        value++;
-      }, 1000);
+    // map value from source into inner observable, when complete emit results and move to next
+    const example = source.pipe(
+      concatMap((val) => of(`Delayed by: ${val}ms`).pipe(delay(val))),
+      concatMap((val) => printNameAsync(val))
+    );
 
-      // observable returns clearInterval when unsubscribed
-      return () => clearInterval(interval);
-    });
+    const subscribe = example.subscribe((val) =>
+      console.log(`With concatMap: ${val}`)
+    );
 
-    // initiate subscription to observable
-    const subscribe = concatObsrv.subscribe((val) => console.log(val));
-
-    // after 11 seconds, unsubscribe, concatObsrv will return clearInterval
-    setTimeout(() => {
-      subscribe.unsubscribe();
-    }, 11000);
-
-    // concatenate firstname and lastname
+    // console.log('executing string concat');
     // this.resNameConcat = `${this.firstname.value} ${this.lastname.value}`;
+    // this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');
 
     // names valid, prompt success
     // this.toastr.success(`Hello ${this.resNameConcat}!`, 'Welcome!');

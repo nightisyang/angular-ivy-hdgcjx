@@ -89,6 +89,7 @@
           type="checkbox"
           value=""
           id="flexCheckDefault"
+          (change)="onCheckBoxChange($event)"
         />
         <label class="form-check-label" for="flexCheckDefault">
           Default checkbox
@@ -112,6 +113,8 @@
     <p>Form Valid: {{ basicForm.valid | json }}</p>
     <p>Name Error: {{ name.errors | json }}</p>
     <p>Age Error: {{ age.errors | json }}</p>
+    <p>Dropdown Error: {{ dropdownVal.errors | json }}</p>
+    <p>Checkbox Error: {{ checkbox.errors | json }}</p>
   </div>
 </div>
 
