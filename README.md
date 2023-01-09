@@ -88,9 +88,9 @@
 
 ## Part 7: Angular routing:
 1. Implement multi page app using angular routing
-    - [ ] angular module
-    - [ ] angular routing
-    - [ ] angular lazy routing
+    - [x] angular module
+    - [x] angular routing
+    - [x] angular lazy routing
 
 
 
