@@ -134,6 +134,7 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
         Validators.min(1),
         Validators.max(120),
       ]),
+      dropdownVal: new FormControl<string | null>(null, Validators.required),
     });
   }
 
@@ -143,6 +144,10 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
 
   get age() {
     return this.basicForm.controls.age;
+  }
+
+  get dropdownVal() {
+    return this.basicForm.controls.dropdownVal;
   }
 
   onSubmit() {
@@ -162,7 +167,7 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
 
     // toastr prompt
     this.toastr.success(
-      `Form Submitted! Name: ${basicFormVal.name} Age: ${basicFormVal.age}`,
+      `Form Submitted! Name: ${this.name.value} Age: ${this.age.value}, Dropdown: ${this.dropdownVal.value}`,
       'Values logged in console and form reset!'
     );
 
@@ -181,6 +186,7 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
 
     this.name.reset();
     this.age.reset();
+    this.dropdownVal.reset();
   }
 
   onDisableInput() {
@@ -193,5 +199,11 @@ export class BasicFormComponent implements OnInit, AfterViewInit {
     if (this.toggleVal === 4) {
       this.toggleVal = 0;
     }
+  }
+
+  onSelectDropdown(str: string) {
+    console.log(str);
+
+    this.dropdownVal.setValue(str);
   }
 }

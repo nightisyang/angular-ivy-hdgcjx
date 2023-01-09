@@ -65,12 +65,20 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Dropdown button
+          {{ dropdownVal.value ? dropdownVal.value : 'Select an option' }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" (click)="onSelectDropdown('Action')"
+            >Action</a
+          >
+          <a class="dropdown-item" (click)="onSelectDropdown('Another action')"
+            >Another action</a
+          >
+          <a
+            class="dropdown-item"
+            (click)="onSelectDropdown('Something else here')"
+            >Something else here</a
+          >
         </div>
       </div>
       <!-- end of DROPDOWN -->
